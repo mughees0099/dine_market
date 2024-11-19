@@ -6,7 +6,7 @@ import Feature from "./Components/Feature";
 import Subscribes from "./Components/Subscribe";
 import Footer from "./Components/Footer";
 import Section from "./Components/Section";
-import AllProducts from "./pages/ALlProducts";
+import AllProducts from "./pages/AllProducts";
 import Female from "./pages/Female";
 import Male from "./pages/Male";
 import Kids from "./pages/Kids";
