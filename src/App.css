@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@media screen and (min-width: 700px) {
+  .margin-nav {
+    margin: 20px 8rem;
+  }
+}
+
+@media screen and (min-width: 700px) {
+  .margin {
+    margin: 4rem 8rem;
+  }
+}
+
+@media screen and (max-width: 699px) {
+  .margin-nav {
+    margin: 20px 20px;
+  }
+}
+@media screen and (max-width: 699px) {
+  .margin {
+    margin: 2rem 20px;
+  }
+}
+.body,
+nav,
+.max {
+  max-width: 1440px;
+  margin: auto auto;
+}
+input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  color: black;
+  background: white;
+}
