@@ -38,6 +38,7 @@ function App() {
             <Route path="/female" element={<Female />} />
             <Route path="/male" element={<Male />} />
             <Route path="/kids" element={<Kids />} />
+
             <Route
               path="/product/:category/:id"
               element={<ProductOverview setIsOpen={setIsOpen} />}
