@@ -1,5 +1,7 @@
 import "./App.css";
+import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { CartProvider } from "./pages/Context/CartContext";
 import Hero from "./Components/Hero";
 import Navbar from "./Components/Navbar";
 import Feature from "./Components/Feature";
@@ -12,9 +14,8 @@ import Male from "./pages/Male";
 import Kids from "./pages/Kids";
 import Products from "./Components/Product";
 import ProductOverview from "./pages/productOverview";
-import { CartProvider } from "./pages/Context/CartContext";
-import { useState } from "react";
 import CheckoutPage from "./pages/Checkout";
+import AdminPanel from "./pages/admin-panel/AdminMain";
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
@@ -26,11 +27,13 @@ function App() {
         <Router
           future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
         >
-          <Navbar
-            toggleCart={toggleCart}
-            isOpen={isOpen}
-            setIsOpen={setIsOpen}
-          />
+          {!window.location.pathname.includes("admin") && (
+            <Navbar
+              toggleCart={toggleCart}
+              isOpen={isOpen}
+              setIsOpen={setIsOpen}
+            />
+          )}
 
           <Routes>
             <Route path="/" element={<Home />} />
@@ -47,9 +50,10 @@ function App() {
               path="/products/:id/checkout/:id"
               element={<CheckoutPage />}
             />
+            <Route path="/admin" element={<AdminPanel />} />
             <Route path="*" element={<Home />} />
           </Routes>
-          <Footer />
+          {!window.location.pathname.includes("admin") && <Footer />}
         </Router>
       </main>
     </CartProvider>
