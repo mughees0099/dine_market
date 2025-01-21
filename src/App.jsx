@@ -16,6 +16,7 @@ import Products from "./Components/Product";
 import ProductOverview from "./pages/productOverview";
 import CheckoutPage from "./pages/Checkout";
 import AdminPanel from "./pages/admin-panel/AdminMain";
+import UserPanel from "./pages/user-panel/UserMain";
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
@@ -51,6 +52,7 @@ function App() {
               element={<CheckoutPage />}
             />
             <Route path="/admin" element={<AdminPanel />} />
+            <Route path="/user/*" element={<UserPanel />} />
             <Route path="*" element={<Home />} />
           </Routes>
           {!window.location.pathname.includes("admin") && <Footer />}

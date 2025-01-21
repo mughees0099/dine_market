@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 const Sidebar = ({ activeTab, setActiveTab }) => {
   const tabs = [
     "dashboard",
