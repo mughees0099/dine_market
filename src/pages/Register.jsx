@@ -318,7 +318,7 @@ function RegisterPage() {
                   type="checkbox"
                   checked={acceptTerms}
                   onChange={() => setAcceptTerms(!acceptTerms)}
-                  className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                  className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded "
                 />
               </div>
               <div className="ml-3 text-sm">
@@ -326,7 +326,7 @@ function RegisterPage() {
                   I accept the{" "}
                   <a
                     href="/terms"
-                    className="text-gray-600 hover:text-gray-500"
+                    className="text-gray-600 hover:text-gray-500 underline"
                   >
                     Terms and Conditions
                   </a>

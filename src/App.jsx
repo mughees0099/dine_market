@@ -1,6 +1,13 @@
+"use client";
+
 import "./App.css";
 import { useState } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useLocation,
+} from "react-router-dom";
 import { CartProvider } from "./pages/Context/CartContext";
 import Hero from "./Components/Hero";
 import Navbar from "./Components/Navbar";
@@ -18,13 +25,18 @@ import CheckoutPage from "./pages/Checkout";
 import AdminPanel from "./pages/admin-panel/AdminMain";
 import UserPanel from "./pages/user-panel/UserMain";
 import LoginPage from "./pages/Login";
+import NotFound from "./pages/NotFound";
+import RegisterPage from "./pages/Register";
 
-function App() {
+// Create a wrapper component that uses useLocation
+function AppContent() {
   const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation(); // This will cause re-render when route changes
 
   const toggleCart = () => setIsOpen(!isOpen);
+
   const isAdminLoginRegister = () => {
-    const path = window.location.pathname;
+    const path = location.pathname; // Use location from React Router instead of window.location
     return (
       path.includes("admin") ||
       path.includes("user") ||
@@ -32,43 +44,42 @@ function App() {
       path.includes("register")
     );
   };
+
+  return (
+    <main className="body">
+      {!isAdminLoginRegister() && (
+        <Navbar toggleCart={toggleCart} isOpen={isOpen} setIsOpen={setIsOpen} />
+      )}
+
+      <Routes>
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/allProducts" element={<AllProducts />} />
+        <Route path="/female" element={<Female />} />
+        <Route path="/male" element={<Male />} />
+        <Route path="/kids" element={<Kids />} />
+
+        <Route
+          path="/product/:category/:id"
+          element={<ProductOverview setIsOpen={setIsOpen} />}
+        />
+        <Route path="/products/:id/checkout/:id" element={<CheckoutPage />} />
+        <Route path="/admin" element={<AdminPanel />} />
+        <Route path="/user/*" element={<UserPanel />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+      {!isAdminLoginRegister() && <Footer />}
+    </main>
+  );
+}
+
+function App() {
   return (
     <CartProvider>
-      <main className="body">
-        <Router
-          future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
-        >
-          {!isAdminLoginRegister() && (
-            <Navbar
-              toggleCart={toggleCart}
-              isOpen={isOpen}
-              setIsOpen={setIsOpen}
-            />
-          )}
-
-          <Routes>
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/" element={<Home />} />
-            <Route path="/allProducts" element={<AllProducts />} />
-            <Route path="/female" element={<Female />} />
-            <Route path="/male" element={<Male />} />
-            <Route path="/kids" element={<Kids />} />
-
-            <Route
-              path="/product/:category/:id"
-              element={<ProductOverview setIsOpen={setIsOpen} />}
-            />
-            <Route
-              path="/products/:id/checkout/:id"
-              element={<CheckoutPage />}
-            />
-            <Route path="/admin" element={<AdminPanel />} />
-            <Route path="/user/*" element={<UserPanel />} />
-            <Route path="*" element={<Home />} />
-          </Routes>
-          {!isAdminLoginRegister() && <Footer />}
-        </Router>
-      </main>
+      <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+        <AppContent />
+      </Router>
     </CartProvider>
   );
 }
