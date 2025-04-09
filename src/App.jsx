@@ -17,18 +17,28 @@ import ProductOverview from "./pages/productOverview";
 import CheckoutPage from "./pages/Checkout";
 import AdminPanel from "./pages/admin-panel/AdminMain";
 import UserPanel from "./pages/user-panel/UserMain";
+import LoginPage from "./pages/Login";
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleCart = () => setIsOpen(!isOpen);
+  const isAdminLoginRegister = () => {
+    const path = window.location.pathname;
+    return (
+      path.includes("admin") ||
+      path.includes("user") ||
+      path.includes("login") ||
+      path.includes("register")
+    );
+  };
   return (
     <CartProvider>
       <main className="body">
         <Router
           future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
         >
-          {!window.location.pathname.includes("admin") && (
+          {!isAdminLoginRegister() && (
             <Navbar
               toggleCart={toggleCart}
               isOpen={isOpen}
@@ -37,6 +47,7 @@ function App() {
           )}
 
           <Routes>
+            <Route path="/login" element={<LoginPage />} />
             <Route path="/" element={<Home />} />
             <Route path="/allProducts" element={<AllProducts />} />
             <Route path="/female" element={<Female />} />
@@ -55,7 +66,7 @@ function App() {
             <Route path="/user/*" element={<UserPanel />} />
             <Route path="*" element={<Home />} />
           </Routes>
-          {!window.location.pathname.includes("admin") && <Footer />}
+          {!isAdminLoginRegister() && <Footer />}
         </Router>
       </main>
     </CartProvider>

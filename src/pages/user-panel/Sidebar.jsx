@@ -9,11 +9,13 @@ import {
   BellIcon,
   TagIcon,
 } from "@heroicons/react/outline";
+import { LayoutDashboard } from "lucide-react";
 
 const Sidebar = ({ open, setOpen }) => {
   const location = useLocation();
   const navigation = [
-    { name: "Dashboard", href: "/user", icon: HomeIcon },
+    { name: "Home", href: "/", icon: HomeIcon },
+    { name: "Dashboard", href: "/user", icon: LayoutDashboard },
     { name: "Orders", href: "/user/orders", icon: ShoppingBagIcon },
     { name: "Profile", href: "/user/profile", icon: UserIcon },
     { name: "Wishlist", href: "/user/wishlist", icon: HeartIcon },
@@ -31,7 +33,7 @@ const Sidebar = ({ open, setOpen }) => {
       <div className="flex items-center justify-center mt-8">
         <div className="flex items-center">
           <span className="text-2xl font-semibold text-gray-800">
-            E-Shop Dashboard
+            Dine Market
           </span>
         </div>
       </div>
