@@ -99,11 +99,11 @@ function Navbar({ toggleCart, isOpen, setIsOpen }) {
               {cart.length}
             </span>
           </button>
-          <div className="font-bold text-slate-800">
+          <div className="font-bold text-slate-800 space-x-2">
             <Link className="hover:underline " to="/login">
               Login
             </Link>
-            /
+            <span>/</span>
             <Link className="hover:underline " to="/register">
               Register
             </Link>
